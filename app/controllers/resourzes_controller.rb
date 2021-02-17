@@ -15,7 +15,9 @@ class ResourzesController < ApplicationController
     end
 
     def create
-
+        @resourze = Resourze.new(:resourze_params)
+        if @resourze.save
+            redirect_to resourze_path(@resourze)
     end
 
     def edit
@@ -28,6 +30,11 @@ class ResourzesController < ApplicationController
 
     def destroy
         #restrict to only allow the user to change
+    end
+
+    private
+    def resourze_params
+        params.require(:resourze).permit(:address, :city, :state, :zip_code, :phone_num, :site_url, :non_profit, :name, :user_id)
     end
 
 end
